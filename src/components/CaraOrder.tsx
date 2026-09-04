@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect } from "react";
+
 const steps = [
   {
     number: "01",
@@ -26,6 +30,23 @@ const steps = [
 ];
 
 export default function CaraOrder() {
+  useEffect(() => {
+    const els = document.querySelectorAll(".reveal");
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section id="cara-order" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
       <div className="reveal max-w-xl">

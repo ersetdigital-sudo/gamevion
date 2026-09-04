@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
 import TrustStrip from "@/components/TrustStrip";
@@ -11,27 +11,6 @@ import Testimoni from "@/components/Testimoni";
 import Footer from "@/components/Footer";
 
 export default function Home() {
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-
-    document.querySelectorAll(".reveal").forEach((el, i) => {
-      (el as HTMLElement).style.transitionDelay = `${(i % 4) * 70}ms`;
-      io.observe(el);
-    });
-
-    return () => io.disconnect();
-  }, []);
-
   return (
     <>
       <Header />

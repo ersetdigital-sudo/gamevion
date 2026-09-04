@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect } from "react";
+
 const testimonials = [
   {
     stars: 5,
@@ -35,6 +39,23 @@ const testimonials = [
 ];
 
 export default function Testimoni() {
+  useEffect(() => {
+    const els = document.querySelectorAll(".reveal");
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section className="border-y border-white/10 bg-[color:var(--panel)]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">

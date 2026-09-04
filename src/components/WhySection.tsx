@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect } from "react";
+
 const features = [
   {
     title: "Proses Cepat",
@@ -44,6 +48,23 @@ const features = [
 ];
 
 export default function WhySection() {
+  useEffect(() => {
+    const els = document.querySelectorAll(".reveal");
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section className="relative overflow-hidden border-y border-white/10 bg-[color:var(--panel)]">
       <div className="pointer-events-none absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-[color:var(--em)]/10 blur-3xl" />
