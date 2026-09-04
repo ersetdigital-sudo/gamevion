@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import crypto from "crypto";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -18,27 +17,29 @@ export async function POST(request: Request) {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
+    const base64 = buffer.toString("base64");
+    const dataUri = `data:${file.type};base64,${base64}`;
+
+    const auth = Buffer.from(`${API_KEY}:${API_SECRET}`).toString("base64");
 
     const timestamp = Math.round(Date.now() / 1000);
-    const folder = "gamevion/qris";
 
-    const paramsToSign = `folder=${folder}&timestamp=${timestamp}`;
-    const signature = crypto
-      .createHmac("sha1", API_SECRET)
-      .update(paramsToSign)
-      .digest("hex");
-
-    const uploadForm = new FormData();
-    const blob = new Blob([buffer], { type: file.type });
-    uploadForm.append("file", blob, file.name);
-    uploadForm.append("api_key", API_KEY);
-    uploadForm.append("timestamp", timestamp.toString());
-    uploadForm.append("folder", folder);
-    uploadForm.append("signature", signature);
+    const uploadBody = JSON.stringify({
+      file: dataUri,
+      folder: "gamevion/qris",
+      timestamp: timestamp,
+    });
 
     const res = await fetch(
       `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
-      { method: "POST", body: uploadForm }
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Basic ${auth}`,
+        },
+        body: uploadBody,
+      }
     );
 
     const data = await res.json();
@@ -47,7 +48,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ url: data.secure_url });
     } else {
       return NextResponse.json(
-        { error: data.error?.message || JSON.stringify(data) },
+        { error: data.error?.message || "Upload failed" },
         { status: 500 }
       );
     }
