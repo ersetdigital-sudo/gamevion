@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const { data, error } = await supabaseAdmin
       .from("categories")
-      .select("*")
+      .select("*, products(price)")
       .order("sort_order");
 
     if (error) {
