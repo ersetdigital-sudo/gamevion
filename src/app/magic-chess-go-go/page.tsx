@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import GameBanner from "@/components/GameBanner";
-import OrderForm from "@/components/OrderForm";
-import OrderSidebar from "@/components/OrderSidebar";
+import GamePageClient from "@/components/GamePageClient";
 
 export const metadata: Metadata = {
   title: "Top Up Magic Chess: Go Go — GAMEVION",
@@ -31,37 +27,23 @@ const ACCOUNT_FIELDS = [
 
 export default function MagicChessGoGoPage() {
   return (
-    <>
-      <Header />
-      <GameBanner
-        backgroundImage="/images/90841904-8491-403e-a9f5-c8f53b796a8d.png"
-        gameIcon="/images/90841904-8491-403e-a9f5-c8f53b796a8d.png"
-        gameName="Magic Chess: Go Go"
-        developer="Moonton"
-        tags={[
-          "Proses otomatis",
-          "Layanan 24 jam",
-          "9 metode pembayaran",
-          "Garansi refund bila gagal",
-        ]}
-        description="Top up Diamond langsung ke akun game. Tanpa registrasi, tanpa login."
-      />
-      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-        <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
-          <OrderForm
-            gameId="magic-chess-go-go"
-            gameName="Magic Chess: Go Go"
-            accountFields={ACCOUNT_FIELDS}
-            nominals={NOMINALS}
-          />
-          <OrderSidebar
-            gameName="Magic Chess: Go Go"
-            defaultItem="5 Diamond"
-            defaultPrice={1500}
-          />
-        </div>
-      </main>
-      <Footer />
-    </>
+    <GamePageClient
+      gameId="magic-chess-go-go"
+      gameName="Magic Chess: Go Go"
+      developer="Moonton"
+      description="Top up Diamond langsung ke akun game. Tanpa registrasi, tanpa login."
+      backgroundImage="/images/90841904-8491-403e-a9f5-c8f53b796a8d.png"
+      gameIcon="/images/90841904-8491-403e-a9f5-c8f53b796a8d.png"
+      tags={[
+        "Proses otomatis",
+        "Layanan 24 jam",
+        "9 metode pembayaran",
+        "Garansi refund bila gagal",
+      ]}
+      accountFields={ACCOUNT_FIELDS}
+      nominals={NOMINALS}
+      defaultItem="5 Diamond"
+      defaultPrice={1500}
+    />
   );
 }

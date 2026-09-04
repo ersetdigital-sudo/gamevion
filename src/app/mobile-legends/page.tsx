@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import GameBanner from "@/components/GameBanner";
-import OrderForm from "@/components/OrderForm";
-import OrderSidebar from "@/components/OrderSidebar";
+import GamePageClient from "@/components/GamePageClient";
 
 export const metadata: Metadata = {
   title: "Top Up Mobile Legends Termurah — GAMEVION",
@@ -44,38 +40,24 @@ const ACCOUNT_FIELDS = [
 
 export default function MobileLegendsPage() {
   return (
-    <>
-      <Header />
-      <GameBanner
-        backgroundImage="/images/602df167-7ace-40bc-bf94-069fdea17603.png"
-        gameIcon="/images/65bfc705-5c40-4680-a896-abc1cb7bb978.svg"
-        gameName="Mobile Legends"
-        developer="Moonton"
-        badge="BEST SELLER"
-        tags={[
-          "Proses otomatis",
-          "Layanan 24 jam",
-          "9 metode pembayaran",
-          "Garansi refund bila gagal",
-        ]}
-        description="Top up Diamond langsung ke akun game. Tanpa registrasi, tanpa login."
-      />
-      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-        <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
-          <OrderForm
-            gameId="mobile-legends"
-            gameName="Mobile Legends"
-            accountFields={ACCOUNT_FIELDS}
-            nominals={NOMINALS}
-          />
-          <OrderSidebar
-            gameName="Mobile Legends"
-            defaultItem="5 Diamond"
-            defaultPrice={1500}
-          />
-        </div>
-      </main>
-      <Footer />
-    </>
+    <GamePageClient
+      gameId="mobile-legends"
+      gameName="Mobile Legends"
+      developer="Moonton"
+      badge="BEST SELLER"
+      description="Top up Diamond langsung ke akun game. Tanpa registrasi, tanpa login."
+      backgroundImage="/images/602df167-7ace-40bc-bf94-069fdea17603.png"
+      gameIcon="/images/65bfc705-5c40-4680-a896-abc1cb7bb978.svg"
+      tags={[
+        "Proses otomatis",
+        "Layanan 24 jam",
+        "9 metode pembayaran",
+        "Garansi refund bila gagal",
+      ]}
+      accountFields={ACCOUNT_FIELDS}
+      nominals={NOMINALS}
+      defaultItem="5 Diamond"
+      defaultPrice={1500}
+    />
   );
 }

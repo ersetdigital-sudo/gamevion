@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import GameBanner from "@/components/GameBanner";
-import OrderForm from "@/components/OrderForm";
-import OrderSidebar from "@/components/OrderSidebar";
+import GamePageClient from "@/components/GamePageClient";
 
 export const metadata: Metadata = {
   title: "Top Up Free Fire Termurah — GAMEVION",
@@ -43,38 +39,24 @@ const ACCOUNT_FIELDS = [
 
 export default function FreeFirePage() {
   return (
-    <>
-      <Header />
-      <GameBanner
-        backgroundImage="/images/849e27b6-18a9-49b0-a8fb-d94761a7285b.png"
-        gameIcon="/images/849e27b6-18a9-49b0-a8fb-d94761a7285b.png"
-        gameName="Free Fire"
-        developer="Garena"
-        badge="HOT"
-        tags={[
-          "Proses otomatis",
-          "Layanan 24 jam",
-          "9 metode pembayaran",
-          "Garansi refund bila gagal",
-        ]}
-        description="Top up Diamond langsung ke akun game. Tanpa registrasi, tanpa login."
-      />
-      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-        <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
-          <OrderForm
-            gameId="free-fire"
-            gameName="Free Fire"
-            accountFields={ACCOUNT_FIELDS}
-            nominals={NOMINALS}
-          />
-          <OrderSidebar
-            gameName="Free Fire"
-            defaultItem="5 Diamond"
-            defaultPrice={1400}
-          />
-        </div>
-      </main>
-      <Footer />
-    </>
+    <GamePageClient
+      gameId="free-fire"
+      gameName="Free Fire"
+      developer="Garena"
+      badge="HOT"
+      description="Top up Diamond langsung ke akun game. Tanpa registrasi, tanpa login."
+      backgroundImage="/images/849e27b6-18a9-49b0-a8fb-d94761a7285b.png"
+      gameIcon="/images/849e27b6-18a9-49b0-a8fb-d94761a7285b.png"
+      tags={[
+        "Proses otomatis",
+        "Layanan 24 jam",
+        "9 metode pembayaran",
+        "Garansi refund bila gagal",
+      ]}
+      accountFields={ACCOUNT_FIELDS}
+      nominals={NOMINALS}
+      defaultItem="5 Diamond"
+      defaultPrice={1400}
+    />
   );
 }

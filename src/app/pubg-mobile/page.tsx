@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import GameBanner from "@/components/GameBanner";
-import OrderForm from "@/components/OrderForm";
-import OrderSidebar from "@/components/OrderSidebar";
+import GamePageClient from "@/components/GamePageClient";
 
 export const metadata: Metadata = {
   title: "Top Up PUBG Mobile Termurah — GAMEVION",
@@ -47,37 +43,23 @@ const ACCOUNT_FIELDS = [
 
 export default function PubgMobilePage() {
   return (
-    <>
-      <Header />
-      <GameBanner
-        backgroundImage="/images/12af396c-da57-4a23-b13b-16c4d480adc2.png"
-        gameIcon="/images/12af396c-da57-4a23-b13b-16c4d480adc2.png"
-        gameName="PUBG Mobile"
-        developer="Level Infinite"
-        tags={[
-          "Proses otomatis",
-          "Layanan 24 jam",
-          "9 metode pembayaran",
-          "Garansi refund bila gagal",
-        ]}
-        description="Top up UC langsung ke akun game. Tanpa registrasi, tanpa login."
-      />
-      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-        <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
-          <OrderForm
-            gameId="pubg-mobile"
-            gameName="PUBG Mobile"
-            accountFields={ACCOUNT_FIELDS}
-            nominals={NOMINALS}
-          />
-          <OrderSidebar
-            gameName="PUBG Mobile"
-            defaultItem="60 UC"
-            defaultPrice={13500}
-          />
-        </div>
-      </main>
-      <Footer />
-    </>
+    <GamePageClient
+      gameId="pubg-mobile"
+      gameName="PUBG Mobile"
+      developer="Level Infinite"
+      description="Top up UC langsung ke akun game. Tanpa registrasi, tanpa login."
+      backgroundImage="/images/12af396c-da57-4a23-b13b-16c4d480adc2.png"
+      gameIcon="/images/12af396c-da57-4a23-b13b-16c4d480adc2.png"
+      tags={[
+        "Proses otomatis",
+        "Layanan 24 jam",
+        "9 metode pembayaran",
+        "Garansi refund bila gagal",
+      ]}
+      accountFields={ACCOUNT_FIELDS}
+      nominals={NOMINALS}
+      defaultItem="60 UC"
+      defaultPrice={13500}
+    />
   );
 }
