@@ -53,6 +53,24 @@ export default function AdminNominalsPage() {
     return formatted.replace(/[^\d]/g, "");
   };
 
+  const handlePriceInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target;
+    const cursorPos = input.selectionStart || 0;
+    const oldVal = input.value;
+    const oldRaw = oldVal.replace(/\D/g, "");
+
+    const newRaw = parseRupiah(oldVal);
+    const formatted = formatRupiah(newRaw);
+
+    setForm({ ...form, value: newRaw });
+
+    requestAnimationFrame(() => {
+      const diff = formatted.length - oldVal.length;
+      const newPos = cursorPos + diff;
+      input.setSelectionRange(newPos, newPos);
+    });
+  };
+
   const openAdd = () => {
     setEditing(null);
     setForm({ value: "", label: "", tag: "", sort_order: String(nominals.length) });
@@ -213,7 +231,7 @@ export default function AdminNominalsPage() {
                   type="text"
                   inputMode="numeric"
                   value={form.value ? formatRupiah(form.value) : ""}
-                  onChange={(e) => setForm({ ...form, value: parseRupiah(e.target.value) })}
+                  onChange={handlePriceInput}
                   className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm outline-none focus:border-[color:var(--em)]"
                   placeholder="Rp 0"
                 />
