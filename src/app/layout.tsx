@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Space_Grotesk, Manrope } from 'next/font/google';
 import './globals.css';
 import 'swiper/css';
+import JsonLd from '@/components/JsonLd';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -17,25 +18,46 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: 'GAMEVION — Top Up Game Instan & Aman',
-  description: 'Top up diamond & UC langsung ke akun game. Tanpa registrasi, proses otomatis 24 jam.',
+  description: 'Top up diamond, UC, genesis crystal langsung ke akun game. Mobile Legends, PUBG, Free Fire, Genshin Impact. Tanpa registrasi, proses otomatis 24 jam.',
+  keywords: ['top up game', 'beli diamond mobile legends', 'top up uc pubg', 'top up free fire', 'top up genshin impact', 'top up cod mobile', 'game voucher indonesia', 'top up game online'],
+  authors: [{ name: 'GAMEVION' }],
+  creator: 'GAMEVION',
+  publisher: 'GAMEVION',
+  metadataBase: new URL('https://gamevion.net'),
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     title: 'GAMEVION — Top Up Game Instan & Aman',
-    description: 'Top up diamond & UC langsung ke akun game. Tanpa registrasi, proses otomatis 24 jam.',
+    description: 'Top up diamond, UC, genesis crystal langsung ke akun game. Tanpa registrasi, proses otomatis 24 jam.',
+    url: 'https://gamevion.net',
+    siteName: 'GAMEVION',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'GAMEVION - Top Up Game',
+        alt: 'GAMEVION - Top Up Game Instan',
       },
     ],
+    locale: 'id_ID',
     type: 'website',
-    url: 'https://gamevion.net',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'GAMEVION — Top Up Game Instan & Aman',
-    description: 'Top up diamond & UC langsung ke akun game. Tanpa registrasi, proses otomatis 24 jam.',
+    description: 'Top up diamond, UC, genesis crystal langsung ke akun game. Tanpa registrasi, proses otomatis 24 jam.',
     images: ['/og-image.png'],
   },
 };
@@ -48,6 +70,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       <head>
+        <JsonLd />
         <link rel="icon" href="/favicon.ico?t=20260903" type="image/x-icon" />
         <link rel="icon" href="/favicon.png?t=20260903" type="image/png" />
         <link rel="apple-touch-icon" href="/favicon.png?t=20260903" />

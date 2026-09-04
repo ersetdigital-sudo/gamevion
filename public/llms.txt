@@ -1,0 +1,41 @@
+# GAMEVION
+
+> GAMEVION adalah layanan top up game dan voucher digital Indonesia. Tanpa registrasi akun — cukup User ID, pilih nominal, bayar, item langsung masuk.
+
+## Services
+
+- Top up diamond, UC, genesis crystal, dan mata uang in-game lainnya
+- Support 6 game: Mobile Legends, PUBG Mobile, Free Fire, Genshin Impact, Call of Duty Mobile, Magic Chess: Go Go
+- Pembayaran via QRIS, GoPay, OVO, DANA, ShopeePay, Virtual Account (BCA, Mandiri, BRI), Alfamart, Indomaret
+- Proses otomatis 24 jam, item masuk dalam hitungan menit
+
+## How it works
+
+1. Pilih game yang ingin di-top up
+2. Masukkan User ID dan Server
+3. Pilih nominal diamond/crystal
+4. Pilih metode pembayaran
+5. Bayar, item masuk otomatis ke akun game
+
+## Key facts
+
+- Tanpa registrasi akun
+- Proses otomatis 24/7
+- Harga transparan, tanpa biaya tersembunyi
+- Support WhatsApp untuk bantuan
+
+## Contact
+
+- Website: https://gamevion.net
+- Cek transaksi: https://gamevion.net/cek-transaksi
+
+## URLs
+
+- Beranda: https://gamevion.net
+- Mobile Legends: https://gamevion.net/mobile-legends
+- PUBG Mobile: https://gamevion.net/pubg-mobile
+- Free Fire: https://gamevion.net/free-fire
+- Genshin Impact: https://gamevion.net/genshin-impact
+- Call of Duty Mobile: https://gamevion.net/call-of-duty-mobile
+- Magic Chess Go Go: https://gamevion.net/magic-chess-go-go
+- Cek Transaksi: https://gamevion.net/cek-transaksi
