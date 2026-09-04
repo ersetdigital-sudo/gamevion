@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import GamePageClient from "@/components/GamePageClient";
+import { getNominals } from "@/lib/nominals";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Top Up Magic Chess: Go Go — GAMEVION",
@@ -7,25 +10,14 @@ export const metadata: Metadata = {
     "Top up Magic Chess: Go Go (Diamond) di GAMEVION. Masukkan User ID, pilih nominal, bayar — tanpa perlu bikin akun.",
 };
 
-const NOMINALS = [
-  { value: 1500, label: "5 Diamond" },
-  { value: 3900, label: "14 Diamond" },
-  { value: 7900, label: "28 Diamond" },
-  { value: 15500, label: "56 Diamond", tag: "LARIS" },
-  { value: 30500, label: "112 Diamond" },
-  { value: 60500, label: "224 Diamond", tag: "HEMAT" },
-  { value: 149000, label: "560 Diamond" },
-  { value: 295000, label: "1.120 Diamond" },
-  { value: 45000, label: "Chess Pass", tag: "POPULER" },
-  { value: 120000, label: "Chess Pass Plus" },
-];
-
 const ACCOUNT_FIELDS = [
   { label: "User ID", placeholder: "Contoh: 123456789", type: "text" },
   { label: "Zone ID", placeholder: "Contoh: 2345", type: "text" },
 ];
 
-export default function MagicChessGoGoPage() {
+export default async function MagicChessGoGoPage() {
+  const nominals = await getNominals("magic-chess-go-go");
+
   return (
     <GamePageClient
       gameId="magic-chess-go-go"
@@ -41,7 +33,7 @@ export default function MagicChessGoGoPage() {
         "Garansi refund bila gagal",
       ]}
       accountFields={ACCOUNT_FIELDS}
-      nominals={NOMINALS}
+      nominals={nominals}
       defaultItem="5 Diamond"
       defaultPrice={1500}
     />

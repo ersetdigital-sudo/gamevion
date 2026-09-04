@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import GamePageClient from "@/components/GamePageClient";
+import { getNominals } from "@/lib/nominals";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Top Up Free Fire Termurah — GAMEVION",
@@ -18,26 +21,13 @@ export const metadata: Metadata = {
   },
 };
 
-const NOMINALS = [
-  { value: 1400, label: "5 Diamond" },
-  { value: 2600, label: "12 Diamond" },
-  { value: 8300, label: "50 Diamond" },
-  { value: 10500, label: "70 Diamond", tag: "LARIS" },
-  { value: 14500, label: "100 Diamond" },
-  { value: 20000, label: "140 Diamond" },
-  { value: 49500, label: "355 Diamond", tag: "HEMAT" },
-  { value: 99000, label: "720 Diamond" },
-  { value: 196000, label: "1.450 Diamond" },
-  { value: 29000, label: "Membership Mingguan" },
-  { value: 89000, label: "Membership Bulanan", tag: "POPULER" },
-  { value: 15000, label: "Level Up Pass" },
-];
-
 const ACCOUNT_FIELDS = [
   { label: "User ID", placeholder: "Contoh: 987654321", type: "text" },
 ];
 
-export default function FreeFirePage() {
+export default async function FreeFirePage() {
+  const nominals = await getNominals("free-fire");
+
   return (
     <GamePageClient
       gameId="free-fire"
@@ -54,7 +44,7 @@ export default function FreeFirePage() {
         "Garansi refund bila gagal",
       ]}
       accountFields={ACCOUNT_FIELDS}
-      nominals={NOMINALS}
+      nominals={nominals}
       defaultItem="5 Diamond"
       defaultPrice={1400}
     />

@@ -1,24 +1,14 @@
 import type { Metadata } from "next";
 import GamePageClient from "@/components/GamePageClient";
+import { getNominals } from "@/lib/nominals";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Top Up Call of Duty: Mobile — GAMEVION",
   description:
     "Top up Call of Duty: Mobile (CP) di GAMEVION. Masukkan Open ID, pilih nominal, bayar — tanpa perlu bikin akun.",
 };
-
-const NOMINALS = [
-  { value: 12000, label: "80 CP" },
-  { value: 23000, label: "160 CP" },
-  { value: 34000, label: "240 CP" },
-  { value: 59000, label: "420 CP", tag: "LARIS" },
-  { value: 109000, label: "800 CP" },
-  { value: 159000, label: "1.200 CP", tag: "HEMAT" },
-  { value: 309000, label: "2.400 CP" },
-  { value: 629000, label: "5.000 CP" },
-  { value: 89000, label: "Battle Pass", tag: "POPULER" },
-  { value: 229000, label: "BP Plus" },
-];
 
 const ACCOUNT_FIELDS = [
   {
@@ -28,7 +18,9 @@ const ACCOUNT_FIELDS = [
   },
 ];
 
-export default function CallOfDutyMobilePage() {
+export default async function CallOfDutyMobilePage() {
+  const nominals = await getNominals("call-of-duty-mobile");
+
   return (
     <GamePageClient
       gameId="call-of-duty-mobile"
@@ -45,7 +37,7 @@ export default function CallOfDutyMobilePage() {
         "Garansi refund bila gagal",
       ]}
       accountFields={ACCOUNT_FIELDS}
-      nominals={NOMINALS}
+      nominals={nominals}
       defaultItem="80 CP"
       defaultPrice={12000}
     />

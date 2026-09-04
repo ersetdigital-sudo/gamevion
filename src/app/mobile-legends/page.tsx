@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import GamePageClient from "@/components/GamePageClient";
+import { getNominals } from "@/lib/nominals";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Top Up Mobile Legends Termurah — GAMEVION",
@@ -18,27 +21,14 @@ export const metadata: Metadata = {
   },
 };
 
-const NOMINALS = [
-  { value: 1500, label: "5 Diamond" },
-  { value: 3400, label: "12 Diamond" },
-  { value: 7900, label: "28 Diamond" },
-  { value: 12300, label: "44 Diamond", tag: "LARIS" },
-  { value: 16500, label: "59 Diamond" },
-  { value: 23500, label: "85 Diamond" },
-  { value: 46500, label: "170 Diamond", tag: "HEMAT" },
-  { value: 65000, label: "240 Diamond" },
-  { value: 80000, label: "296 Diamond" },
-  { value: 152000, label: "568 Diamond" },
-  { value: 233000, label: "875 Diamond" },
-  { value: 28000, label: "Weekly Diamond Pass", tag: "POPULER" },
-];
-
 const ACCOUNT_FIELDS = [
   { label: "User ID", placeholder: "Contoh: 123456789", type: "text" },
   { label: "Zone ID", placeholder: "Contoh: 2345", type: "text" },
 ];
 
-export default function MobileLegendsPage() {
+export default async function MobileLegendsPage() {
+  const nominals = await getNominals("mobile-legends");
+
   return (
     <GamePageClient
       gameId="mobile-legends"
@@ -55,7 +45,7 @@ export default function MobileLegendsPage() {
         "Garansi refund bila gagal",
       ]}
       accountFields={ACCOUNT_FIELDS}
-      nominals={NOMINALS}
+      nominals={nominals}
       defaultItem="5 Diamond"
       defaultPrice={1500}
     />
