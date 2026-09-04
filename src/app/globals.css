@@ -243,24 +243,54 @@ h1, h2, h3, .disp {
 }
 
 .opt input[type="radio"] {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .opt input[type="radio"]:checked + .opt-box {
   border-color: var(--em);
-  box-shadow: 0 0 0 1px var(--em);
+  box-shadow: 0 0 0 1px var(--em), 0 0 12px rgba(16, 227, 154, 0.15);
+  background: rgba(16, 227, 154, 0.05);
+}
+
+.opt {
+  position: relative;
+  cursor: pointer;
+}
+
+.opt:active .opt-box {
+  transform: scale(0.97);
+}
+
+.opt:focus-visible .opt-box {
+  outline: 2px solid var(--em);
+  outline-offset: 2px;
 }
 
 .opt-box {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 4px;
-  padding: 12px 16px;
+  padding: 12px 14px;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--panel);
   cursor: pointer;
-  transition: border-color .2s, box-shadow .2s;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease, transform .12s ease;
+  min-height: 80px;
+}
+
+@media (min-width: 640px) {
+  .opt-box {
+    padding: 14px 16px;
+    min-height: 88px;
+  }
+}
+
+.opt:hover .opt-box {
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .opt-tag {
@@ -273,6 +303,12 @@ h1, h2, h3, .disp {
   padding: 2px 8px;
   border-radius: 6px;
   align-self: flex-start;
+  line-height: 1.4;
+  min-height: 18px;
+}
+
+.opt-tag-placeholder {
+  min-height: 18px;
 }
 
 .fld {

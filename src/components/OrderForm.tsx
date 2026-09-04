@@ -178,9 +178,9 @@ export default function OrderForm({
           <span className="step-num">2</span>
           <h2 className="text-base font-bold">Pilih Nominal</h2>
         </div>
-        <div className="mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-3.5 lg:grid-cols-4">
           {nominals.map((nominal) => (
-            <label key={nominal.value} className="opt">
+            <label key={nominal.value} className="opt" tabIndex={0}>
               <input
                 type="radio"
                 name="nominal"
@@ -190,14 +190,16 @@ export default function OrderForm({
                   handleNominalChange(nominal.label, nominal.value)
                 }
               />
-              <div className="opt-box flex-col items-start">
-                {nominal.tag && (
+              <div className="opt-box">
+                {nominal.tag ? (
                   <span className="opt-tag">{nominal.tag}</span>
+                ) : (
+                  <span className="opt-tag-placeholder" />
                 )}
                 <p className="text-[13px] font-bold leading-tight text-white">
                   {nominal.label}
                 </p>
-                <p className="mt-1.5 text-[13px] font-bold text-[color:var(--em)]">
+                <p className="mt-auto pt-1.5 text-[13px] font-bold text-[color:var(--em)]">
                   Rp{" "}
                   {nominal.value.toLocaleString("id-ID")}
                 </p>
