@@ -4,12 +4,14 @@ interface PaymentInstructionsProps {
   method: string;
   invoice: string;
   amount: number;
+  qrImageUrl?: string | null;
 }
 
 export default function PaymentInstructions({
   method,
   invoice,
   amount,
+  qrImageUrl,
 }: PaymentInstructionsProps) {
   const m = method.toLowerCase();
 
@@ -26,13 +28,22 @@ export default function PaymentInstructions({
           Scan QRIS di bawah ini menggunakan e-wallet atau m-banking apapun.
         </p>
         <div className="mt-5 flex flex-col items-center">
-          <div className="flex h-48 w-48 items-center justify-center rounded-2xl border border-white/10 bg-white p-4">
-            <img
-              src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=qrismid:${invoice}:${amount}`}
-              alt="QRIS Code"
-              className="h-full w-full object-contain"
-            />
-          </div>
+          {qrImageUrl ? (
+            <div className="flex h-48 w-48 items-center justify-center rounded-2xl border border-white/10 bg-white p-4">
+              <img
+                src={qrImageUrl}
+                alt="QRIS Code"
+                className="h-full w-full object-contain"
+              />
+            </div>
+          ) : (
+            <div className="flex h-48 w-48 flex-col items-center justify-center rounded-2xl border border-dashed border-white/20 bg-white/[0.03] p-4">
+              <svg className="h-10 w-10 text-gray-500" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+              </svg>
+              <p className="mt-2 text-center text-xs text-gray-400">QR belum tersedia. Hubungi admin.</p>
+            </div>
+          )}
           <p className="mt-3 text-center text-xs text-[color:var(--muted)]">
             Buka GoPay, DANA, OVO, ShopeePay, LinkAja, atau m-banking lalu
             pilih &quot;Scan QR&quot;.

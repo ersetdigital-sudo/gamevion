@@ -54,6 +54,7 @@ export default function InvoicePage({ params }: { params: Promise<{ id: string }
   const [notFound, setNotFound] = useState(false);
   const [copied, setCopied] = useState(false);
   const [invoiceId, setInvoiceId] = useState("");
+  const [qrImageUrl, setQrImageUrl] = useState<string | null>(null);
 
   useEffect(() => {
     params.then((p) => setInvoiceId(p.id));
@@ -67,6 +68,13 @@ export default function InvoicePage({ params }: { params: Promise<{ id: string }
       if (Array.isArray(data) && data.length > 0) {
         setOrder(data[0]);
         setNotFound(false);
+        // Fetch QR image URL for this payment method
+        const pmRes = await fetch(`/api/payment-methods?all=true`);
+        const pmData = await pmRes.json();
+        const pm = Array.isArray(pmData)
+          ? pmData.find((m: { name: string }) => m.name === data[0].payment_method)
+          : null;
+        setQrImageUrl(pm?.qr_image_url || null);
       } else {
         setNotFound(true);
       }
@@ -241,6 +249,7 @@ export default function InvoicePage({ params }: { params: Promise<{ id: string }
               method={order.payment_method}
               invoice={order.invoice}
               amount={order.total_price}
+              qrImageUrl={qrImageUrl}
             />
 
             {/* Countdown timer (simplified) */}

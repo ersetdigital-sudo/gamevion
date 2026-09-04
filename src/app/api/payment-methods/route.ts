@@ -3,11 +3,20 @@ import { getSupabaseAdmin } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
-  const { data, error } = await getSupabaseAdmin()
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const all = searchParams.get("all") === "true";
+
+  let query = getSupabaseAdmin()
     .from("payment_methods")
     .select("*")
     .order("sort_order");
+
+  if (!all) {
+    query = query.eq("is_active", true);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
