@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabase";
 
 export async function GET() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseAdmin
       .from("categories")
       .select("*")
       .order("sort_order");
@@ -22,7 +22,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { data, error } = await supabase
+  const { data, error } = await supabaseAdmin
     .from("categories")
     .insert(body)
     .select()
