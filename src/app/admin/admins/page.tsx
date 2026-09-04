@@ -105,7 +105,7 @@ export default function AdminsPage() {
       {/* Add Form Modal */}
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-          <div className="w-full max-w-md rounded-2xl border border-white/10 bg-[#0E1614] p-6">
+          <form autoComplete="off" onSubmit={(e) => { e.preventDefault(); handleAdd(); }} className="w-full max-w-md rounded-2xl border border-white/10 bg-[#0E1614] p-6">
             <h2 className="disp text-lg font-bold">Tambah Admin Baru</h2>
             <div className="mt-4 space-y-3">
               <div>
@@ -116,6 +116,7 @@ export default function AdminsPage() {
                   className="fld"
                   placeholder="Nama tampilan"
                   autoComplete="off"
+                  name="admin_name"
                 />
               </div>
               <div>
@@ -127,6 +128,7 @@ export default function AdminsPage() {
                   className="fld"
                   placeholder="admin@gamevion.net"
                   autoComplete="off"
+                  name="admin_email"
                 />
               </div>
               <div>
@@ -139,6 +141,7 @@ export default function AdminsPage() {
                     className="fld !pr-10"
                     placeholder="Min. 6 karakter"
                     autoComplete="new-password"
+                    name="admin_new_password"
                   />
                   <button
                     type="button"
@@ -161,20 +164,21 @@ export default function AdminsPage() {
             </div>
             <div className="mt-6 flex gap-3">
               <button
-                onClick={handleAdd}
+                type="submit"
                 disabled={saving || !form.name || !form.email || !form.password}
                 className="flex-1 rounded-lg bg-[color:var(--em)] py-2.5 text-sm font-bold text-[#04120C] disabled:opacity-50"
               >
                 {saving ? "Menambahkan..." : "Tambah Admin"}
               </button>
               <button
+                type="button"
                 onClick={() => setShowForm(false)}
                 className="flex-1 rounded-lg border border-white/10 py-2.5 text-sm text-gray-400"
               >
                 Batal
               </button>
             </div>
-          </div>
+          </form>
         </div>
       )}
 
