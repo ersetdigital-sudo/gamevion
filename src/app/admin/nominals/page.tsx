@@ -43,6 +43,16 @@ export default function AdminNominalsPage() {
     fetchNominals();
   }, [fetchNominals]);
 
+  const formatRupiah = (num: string) => {
+    const raw = num.replace(/\D/g, "");
+    if (!raw) return "";
+    return "Rp " + parseInt(raw).toLocaleString("id-ID");
+  };
+
+  const parseRupiah = (formatted: string) => {
+    return formatted.replace(/[^\d]/g, "");
+  };
+
   const openAdd = () => {
     setEditing(null);
     setForm({ value: "", label: "", tag: "", sort_order: String(nominals.length) });
@@ -198,13 +208,14 @@ export default function AdminNominalsPage() {
             </h2>
             <div className="mt-4 space-y-3">
               <div>
-                <label className="mb-1 block text-xs font-semibold text-white/60">Harga (Rp)</label>
+                <label className="mb-1 block text-xs font-semibold text-white/60">Harga</label>
                 <input
-                  type="number"
-                  value={form.value}
-                  onChange={(e) => setForm({ ...form, value: e.target.value })}
+                  type="text"
+                  inputMode="numeric"
+                  value={form.value ? formatRupiah(form.value) : ""}
+                  onChange={(e) => setForm({ ...form, value: parseRupiah(e.target.value) })}
                   className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm outline-none focus:border-[color:var(--em)]"
-                  placeholder="15000"
+                  placeholder="Rp 0"
                 />
               </div>
               <div>
