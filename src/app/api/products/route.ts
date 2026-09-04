@@ -1,12 +1,14 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase";
+import { getSupabaseAdmin } from "@/lib/supabase";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const categoryId = searchParams.get("category_id");
   const all = searchParams.get("all") === "true";
 
-  let query = supabaseAdmin
+  let query = getSupabaseAdmin()
     .from("products")
     .select("*")
     .order("sort_order");
@@ -30,7 +32,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { data, error } = await supabaseAdmin
+  const { data, error } = await getSupabaseAdmin()
     .from("products")
     .insert(body)
     .select()

@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase";
+import { getSupabaseAdmin } from "@/lib/supabase";
+
+export const dynamic = "force-dynamic";
 
 export async function PUT(
   request: Request,
@@ -8,7 +10,7 @@ export async function PUT(
   const { id } = await params;
   const body = await request.json();
 
-  const { data, error } = await supabaseAdmin
+  const { data, error } = await getSupabaseAdmin()
     .from("settings")
     .update(body)
     .eq("id", id)
@@ -28,7 +30,7 @@ export async function DELETE(
 ) {
   const { id } = await params;
 
-  const { error } = await supabaseAdmin
+  const { error } = await getSupabaseAdmin()
     .from("settings")
     .delete()
     .eq("id", id);

@@ -1,12 +1,14 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase";
+import { getSupabaseAdmin } from "@/lib/supabase";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const { data, error } = await supabaseAdmin
+  const { data, error } = await getSupabaseAdmin()
     .from("products")
     .select("*")
     .eq("id", id)
@@ -26,7 +28,7 @@ export async function PUT(
   const { id } = await params;
   const body = await request.json();
 
-  const { data, error } = await supabaseAdmin
+  const { data, error } = await getSupabaseAdmin()
     .from("products")
     .update(body)
     .eq("id", id)
@@ -47,7 +49,7 @@ export async function PATCH(
   const { id } = await params;
   const body = await request.json();
 
-  const { data, error } = await supabaseAdmin
+  const { data, error } = await getSupabaseAdmin()
     .from("products")
     .update(body)
     .eq("id", id)
@@ -67,7 +69,7 @@ export async function DELETE(
 ) {
   const { id } = await params;
 
-  const { error } = await supabaseAdmin
+  const { error } = await getSupabaseAdmin()
     .from("products")
     .delete()
     .eq("id", id);
