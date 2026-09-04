@@ -28,7 +28,7 @@ export default function Header() {
             Beranda
           </Link>
           <a
-            href="#games"
+            href="/#games"
             className="text-sm font-medium text-gray-300 transition-colors hover:text-white"
           >
             Semua Game
@@ -62,7 +62,7 @@ export default function Header() {
 
         {/* CTA Button (desktop) */}
         <a
-          href="#games"
+          href="/#games"
           className="hidden rounded-lg bg-purple-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-purple-700 md:block"
         >
           Top Up
@@ -119,7 +119,7 @@ export default function Header() {
               Beranda
             </Link>
             <a
-              href="#games"
+              href="/#games"
               className="rounded-lg px-3 py-2 text-sm font-medium text-gray-300 transition-colors hover:bg-white/5 hover:text-white"
               onClick={() => setMobileOpen(false)}
             >
@@ -158,7 +158,7 @@ export default function Header() {
 
           {/* Mobile CTA */}
           <a
-            href="#games"
+            href="/#games"
             className="mt-3 block rounded-lg bg-purple-600 px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-purple-700"
             onClick={() => setMobileOpen(false)}
           >
