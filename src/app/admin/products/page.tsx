@@ -85,6 +85,11 @@ export default function ProductsPage() {
     setProducts(products.map((p) => (p.id === id ? { ...p, is_active: !current } : p)));
   }
 
+  const formatRupiah = (num: number | undefined) => {
+    if (!num) return "";
+    return num.toLocaleString("id-ID");
+  };
+
   function startEdit(prod: Product) {
     setForm(prod);
     setEditingId(prod.id);
@@ -148,15 +153,28 @@ export default function ProductsPage() {
                 <input value={form.name || ""} onChange={(e) => setForm({ ...form, name: e.target.value })} className="fld" placeholder="85 Diamond" />
               </div>
               <div>
-                <label className="mb-1 block text-xs font-semibold text-gray-400">Harga (Rp)</label>
-                <input type="number" value={form.price || ""} onChange={(e) => setForm({ ...form, price: parseInt(e.target.value) })} className="fld" placeholder="23500" />
+                <label className="mb-1 block text-xs font-semibold text-gray-400">Harga</label>
+                <div className="relative">
+                  <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">Rp</span>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    value={formatRupiah(form.price)}
+                    onChange={(e) => {
+                      const raw = e.target.value.replace(/\D/g, "");
+                      setForm({ ...form, price: raw ? parseInt(raw) : 0 });
+                    }}
+                    className="fld !pl-10"
+                    placeholder="0"
+                  />
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="mb-1 block text-xs font-semibold text-gray-400">Tag</label>
                   <select value={form.tag || ""} onChange={(e) => setForm({ ...form, tag: e.target.value })} className="fld">
                     <option value="">-</option>
-                    <option value="LARIS">LARIS</option>
+                    <option value="TERLARIS">TERLARIS</option>
                     <option value="HEMAT">HEMAT</option>
                     <option value="POPULER">POPULER</option>
                   </select>
