@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none">
+  <defs>
+    <linearGradient id="emGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10E39A"/>
+      <stop offset="100%" stop-color="#7C5CFF"/>
+    </linearGradient>
+  </defs>
+  <!-- Geometric G Monogram -->
+  <path d="M20 4 L36 4 L36 12 L28 12 L28 28 L36 28 L36 36 L20 36 C10 36 4 28 4 20 C4 12 10 4 20 4Z" fill="url(#emGrad)"/>
+  <path d="M28 20 L36 20" stroke="#070B0A" stroke-width="3"/>
+  <!-- Wordmark -->
+  <text x="44" y="28" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="22" fill="#E9F2EE" letter-spacing="1">GAMEVION</text>
+</svg>
