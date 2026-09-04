@@ -1,11 +1,14 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const navLinks = [
   { label: "Beranda", href: "/" },
-  { label: "Semua Game", href: "#games" },
+  { label: "Semua Game", href: "/#games" },
   { label: "Top Up Mobile Legends", href: "/mobile-legends" },
-  { label: "Cara Order", href: "#cara-order" },
-  { label: "Cek Transaksi", href: "#cek" },
+  { label: "Cara Order", href: "/#cara-order" },
+  { label: "Cek Transaksi", href: "/cek-transaksi" },
 ];
 
 const helpLinks = [
@@ -15,20 +18,20 @@ const helpLinks = [
   "Hubungi Support",
 ];
 
-const paymentMethods = [
-  "QRIS",
-  "GoPay",
-  "OVO",
-  "DANA",
-  "ShopeePay",
-  "BCA Virtual Account",
-  "BRI",
-  "Mandiri",
-  "Alfamart",
-  "Indomaret",
-];
-
 export default function Footer() {
+  const [paymentMethods, setPaymentMethods] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetch("/api/payment-methods")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setPaymentMethods(data.map((m: { name: string }) => m.name));
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <footer className="relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 pb-10 pt-16 sm:px-6">
