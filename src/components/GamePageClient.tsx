@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import GameBanner from "@/components/GameBanner";
@@ -51,12 +52,20 @@ export default function GamePageClient({
 }: GamePageClientProps) {
   const submitRef = useRef<(() => void) | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = useCallback(() => {
     if (submitRef.current) {
       submitRef.current();
     }
   }, []);
+
+  const handleOrderSuccess = useCallback(
+    (invoice: string) => {
+      router.push(`/invoice/${invoice}`);
+    },
+    [router],
+  );
 
   return (
     <>
@@ -79,6 +88,7 @@ export default function GamePageClient({
             nominals={nominals}
             onSubmitRef={submitRef}
             onSubmittingChange={setSubmitting}
+            onSuccess={handleOrderSuccess}
           />
           <OrderSidebar
             gameName={gameName}

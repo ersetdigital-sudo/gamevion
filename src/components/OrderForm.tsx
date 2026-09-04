@@ -31,6 +31,7 @@ interface OrderFormProps {
   onSubmitRef?: React.MutableRefObject<(() => void) | null>;
   onFormMsgChange?: (msg: string | null) => void;
   onSubmittingChange?: (submitting: boolean) => void;
+  onSuccess?: (invoice: string) => void;
 }
 
 export default function OrderForm({
@@ -43,6 +44,7 @@ export default function OrderForm({
   onSubmitRef,
   onFormMsgChange,
   onSubmittingChange,
+  onSuccess,
 }: OrderFormProps) {
   const [methods, setMethods] = useState<PaymentMethod[]>(paymentMethods || []);
   const [selectedNominal, setSelectedNominal] = useState<string>(
@@ -151,7 +153,7 @@ export default function OrderForm({
       const data = await res.json();
 
       if (res.ok && data.invoice) {
-        showMsg(`Pesanan berhasil dibuat! Invoice: ${data.invoice}. Silakan cek status di halaman Cek Transaksi.`);
+        onSuccess?.(data.invoice);
       } else {
         showMsg(`Gagal membuat pesanan. ${data.error || "Coba lagi."}`);
       }

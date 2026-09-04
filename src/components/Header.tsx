@@ -39,12 +39,12 @@ export default function Header() {
           >
             Cara Order
           </a>
-          <a
-            href="#cek"
+          <Link
+            href="/cek-transaksi"
             className="text-sm font-medium text-gray-300 transition-colors hover:text-white"
           >
             Cek Transaksi
-          </a>
+          </Link>
         </nav>
 
         {/* Search Form (desktop) */}
@@ -132,13 +132,13 @@ export default function Header() {
             >
               Cara Order
             </a>
-            <a
-              href="#cek"
+            <Link
+              href="/cek-transaksi"
               className="rounded-lg px-3 py-2 text-sm font-medium text-gray-300 transition-colors hover:bg-white/5 hover:text-white"
               onClick={() => setMobileOpen(false)}
             >
               Cek Transaksi
-            </a>
+            </Link>
           </nav>
 
           {/* Mobile Search */}
