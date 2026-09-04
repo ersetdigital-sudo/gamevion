@@ -4,9 +4,9 @@ import crypto from "crypto";
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || "dqjh7utdb";
-const API_KEY = process.env.CLOUDINARY_API_KEY || "777554387275569";
-const API_SECRET = process.env.CLOUDINARY_API_SECRET || "5PdPYFpl6ZQh8uDm_uC9oveQaV0";
+const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME!;
+const API_KEY = process.env.CLOUDINARY_API_KEY!;
+const API_SECRET = process.env.CLOUDINARY_API_SECRET!;
 
 export async function POST(request: Request) {
   try {
