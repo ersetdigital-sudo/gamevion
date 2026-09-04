@@ -46,29 +46,7 @@ export default function AdminNominalsPage() {
   const formatRupiah = (num: string) => {
     const raw = num.replace(/\D/g, "");
     if (!raw) return "";
-    return "Rp " + parseInt(raw).toLocaleString("id-ID");
-  };
-
-  const parseRupiah = (formatted: string) => {
-    return formatted.replace(/[^\d]/g, "");
-  };
-
-  const handlePriceInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target;
-    const cursorPos = input.selectionStart || 0;
-    const oldVal = input.value;
-    const oldRaw = oldVal.replace(/\D/g, "");
-
-    const newRaw = parseRupiah(oldVal);
-    const formatted = formatRupiah(newRaw);
-
-    setForm({ ...form, value: newRaw });
-
-    requestAnimationFrame(() => {
-      const diff = formatted.length - oldVal.length;
-      const newPos = cursorPos + diff;
-      input.setSelectionRange(newPos, newPos);
-    });
+    return parseInt(raw).toLocaleString("id-ID");
   };
 
   const openAdd = () => {
@@ -227,14 +205,20 @@ export default function AdminNominalsPage() {
             <div className="mt-4 space-y-3">
               <div>
                 <label className="mb-1 block text-xs font-semibold text-white/60">Harga</label>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  value={form.value ? formatRupiah(form.value) : ""}
-                  onChange={handlePriceInput}
-                  className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm outline-none focus:border-[color:var(--em)]"
-                  placeholder="Rp 0"
-                />
+                <div className="relative">
+                  <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-white/40">Rp</span>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    value={formatRupiah(form.value)}
+                    onChange={(e) => {
+                      const raw = e.target.value.replace(/\D/g, "");
+                      setForm({ ...form, value: raw });
+                    }}
+                    className="w-full rounded-lg border border-white/10 bg-white/5 py-2 pl-10 pr-3 text-sm outline-none focus:border-[color:var(--em)]"
+                    placeholder="0"
+                  />
+                </div>
               </div>
               <div>
                 <label className="mb-1 block text-xs font-semibold text-white/60">Label</label>
