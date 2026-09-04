@@ -1,11 +1,13 @@
 import { type NextRequest } from "next/server";
-import { updateSession } from "@/lib/supabase-middleware";
 
 export async function middleware(request: NextRequest) {
-  // Skip API routes
   if (request.nextUrl.pathname.startsWith("/api")) {
     return;
   }
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return;
+  }
+  const { updateSession } = await import("@/lib/supabase-middleware");
   return await updateSession(request);
 }
 

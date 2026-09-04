@@ -24,13 +24,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const supabase = createClient();
 
   useEffect(() => {
+    if (!supabase) { setLoading(false); return; }
     const getUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
       setLoading(false);
     };
     getUser();
-  }, [supabase.auth]);
+  }, [supabase?.auth]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
