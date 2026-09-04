@@ -38,6 +38,26 @@ export default function GamesGrid() {
       .catch(() => setLoading(false));
   }, []);
 
+  useEffect(() => {
+    if (loading || games.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll("#games .reveal").forEach((el, i) => {
+      (el as HTMLElement).style.transitionDelay = `${(i % 4) * 70}ms`;
+      io.observe(el);
+    });
+    return () => io.disconnect();
+  }, [loading, games]);
+
   if (loading) {
     return (
       <section id="games" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
